@@ -1,0 +1,9 @@
+<!-- views/error.hbs -->
+{{!-- nếu dùng layout, title/stack có thể hiển thị --}}
+<h1>Error {{status}}</h1>
+<h1>{{tittle}}</h1>
+<p>{{message}}</p>
+
+{{#if error.stack}}
+    <pre>{{error.stack}}</pre>
+{{/if}}

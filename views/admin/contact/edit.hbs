@@ -1,0 +1,27 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card-body">
+            <h1 class="card-header">Edit Contact</h1>
+
+            <form action="/admin/contact/edit/{{contact._id}}?_method=PUT" method="post" class="form-control">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Country</label>
+                    <input value="{{contact.country}}" name="country" type="text" class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Address</label>
+                    <input value="{{contact.address}}" name="address" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Phone</label>
+                    <input value="{{contact.phone}}" name="phone" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Email</label>
+                    <input value="{{contact.email}}"  name="email" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

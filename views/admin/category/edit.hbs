@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card-body">
+            <h1 class="card-header">Edit Category</h1>
+
+            <form action="/admin/category/edit/{{category._id}}?_method=PUT" method="post" class="form-control">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Name</label>
+                    <input value="{{category.name}}" name="name" type="text" class="form-control" id="exampleInputEmail1">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">image</label>
+                    <input value="{{category.image}}" name="image" type="text" class="form-control" id="exampleInputPassword1">
+                </div>
+                <div class="mb-3 form-check">
+                    <label for="exampleInputPassword1" class="form-label">Status</label>
+                    <select name="status" class="form-control" id="exampleInputPassword1">
+                        {{#if category.status}}
+                            <option value="false" >Inactive</option>
+                            <option value="true" selected>Active</option>
+                        {{else}}
+                            <option value="false" selected>Inactive</option>
+                            <option value="true">Active</option>
+                        {{/if}}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<section class="hero-section position-relative padding-large"
+         style="background-image: url(images/banner-image-bg-1.jpg); background-size: cover; background-repeat: no-repeat; background-position: center; height: 400px;">
+    <div class="hero-content">
+        <div class="container">
+            <div class="row">
+                <div class="text-center">
+                    <h1>Category</h1>
+                    <div class="breadcrumbs">
+              <span class="item">
+                <a href="/">Home > </a>
+              </span>
+                        <span class="item text-decoration-underline">Category</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="categories" class="padding-large pt-0">
+    <div class="container">
+        <br>
+        <div class="row">
+            {{#each categories}}
+                <div class="col-md-4">
+                    <div class="card mb-4 border-0 rounded-3 position-relative overflow-hidden">
+                        <a href="/category-books/{{_id}}">
+
+                            <div class="ratio ratio-16x9">
+                                <img src="{{image}}"
+                                     class="img-fluid rounded-3 w-100 h-100 object-fit-cover"
+                                     alt="{{name}}">
+                            </div>
+
+                            <h6 class="position-absolute bottom-0 bg-primary m-3 py-1 px-3 rounded-3">
+                                <span class="text-white">{{name}}</span>
+                            </h6>
+
+                        </a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+</section>

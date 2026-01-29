@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="card-body">
+            <h1 class="card-header">Create Product</h1>
+
+            <form action="/admin/product/create" method="post" class="form-control">
+                <div class="mb-3">
+                    <label htmlFor="exampleInputEmail1" class="form-label">Name</label>
+                    <input name="name" type="text" class="form-control" id="exampleInputEmail1"/>
+                </div>
+                <div class="mb-3">
+                    <label htmlFor="exampleInputPassword1" class="form-label">image</label>
+                    <input name="image" type="text" class="form-control" id="exampleInputPassword1"/>
+                </div>
+                <div class="mb-3 form-check">
+                    <label htmlFor="exampleInputPassword1" class="form-label">price</label>
+                    <input name="price" type="number" class="form-control"/>
+                </div>
+                <div class="mb-3 form-check">
+                    <label htmlFor="exampleInputPassword1" class="form-label">author</label>
+                    <input name="author" type="string" class="form-control"/>
+                </div>
+                <div class="mb-3 form-check">
+                    <label htmlFor="exampleInputPassword1" class="form-label">description</label>
+                    <textarea name="description" type="string" class="form-control"></textarea>
+                </div>
+
+                <div class="mb-3 form-check">
+                    <label htmlFor="exampleInputPassword1" class="form-label">category</label>
+                    <select name="categoryId"  class="form-control">
+                        {{#each categories}}
+                            <option value="{{_id}}">{{name}}</option>
+                        {{/each}}
+                    </select>
+
+                </div>
+                <button type="submit" class="btn btn-primary">Thêm</button>
+            </form>
+        </div>
+    </div>
+</div>
