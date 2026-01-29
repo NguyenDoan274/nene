@@ -17,6 +17,7 @@ router.all('/*', function(
         next();
     });
 })
+
 function useAuthenticated(req, res, next) {
     if (req.isAuthenticated() && req.user instanceof Customer) {
         return next(); // Proceed if authenticated
@@ -53,7 +54,7 @@ router.get('/shop', async (req, res) => {
             filter.author = author;
         }
         if (name) {
-            filer.name = { $regex: keyword, $options: 'i' };
+            filter.name = { $regex: name, $options: 'i' };
         }
         const [dbCategory, dbProduct] = await Promise.all([
             Category.find({}),
@@ -104,14 +105,13 @@ router.get('/category', function(req, res, next) {
     });
 });
 
-router.get('/single-product/:id', function(req, res, next) {
+router.get('/single-product/:id', async (req, res,next) => {
+    const [dbProducts, dbProduct] = await Promise.all([
+        Product.find({}),
+        Product.findById(req.params.id).populate('category'),
+    ]);
+    res.render('home/single-product', {title: 'edit', product: dbProduct.toObject(), products:dbProducts.map (p => p.toObject())});
 
-            Product.findOne({_id: req.params.id}).populate('category').then((product) => {
-                Product.find({}).then((dbProduct) => {
-                    products = dbProduct.map(pro => pro.toObject());
-                res.render('home/single-product', {title: 'edit', product: product.toObject(), products:products});
-            });
-        });
 });
 
 
@@ -125,6 +125,21 @@ router.get('/category-books/:id', function(req, res, next) {
     });
 });
 
+router.post('/wishlist/:productId', (req, res) => {
+    if (!req.isAuthenticated()) {
+        req.flash('error_message', 'Vui lòng đăng nhập để thêm vào wishlist ❤️');
+        return res.redirect('back');
+    }
+
+    let customerId = req.user._id;
+    let productId = req.params.productId;
+    Customer.findByIdAndUpdate(customerId, {
+        $addToSet: { wishlist: productId }
+    }).then(() => {
+        req.flash('success_message', 'Đã thêm vào wishlist ❤️');
+        res.redirect('back');
+    });
+});
 
 router.get('/login', function(req, res, next) {
     res.render('home/login', { title: 'login'});

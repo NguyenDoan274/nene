@@ -23,8 +23,12 @@ const customerSchema = new Schema({
         type: String,
         required: true,
         minlength: 5,
-    }
+    },
+    wishlist:
+        [{
+        type: Schema.Types.ObjectId,
+        ref: 'Product',
+    }]
 });
-//const User = mongoose.model('User', userSchema);
-//module.exports = User;
-module.exports = mongoose.model('customers', customerSchema);
+
+module.exports = mongoose.model('Customer', customerSchema);

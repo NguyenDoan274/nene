@@ -21,4 +21,4 @@ const ContactSchema = new Schema({
 });
 //const User = mongoose.model('User');
 //module.exports = User;
-module.exports = mongoose.model('contacts', ContactSchema);
+module.exports = mongoose.model('Contact', ContactSchema);

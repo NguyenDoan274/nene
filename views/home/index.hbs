@@ -150,9 +150,9 @@
             <div class="swiper-wrapper">
                 {{#each products}}
                 <div class="swiper-slide">
-                        <a href="/single-product/{{_id}}">
-                        <div class="card position-relative p-4 border rounded-3">
 
+                        <div class="card position-relative p-4 border rounded-3">
+                            <a href="/single-product/{{_id}}">
                             <img src="{{image}}" class="img-fluid shadow-sm" alt="{{name}}">
                             <h6 class="mt-4 mb-0 fw-bold">{{name}}</h6>
                             <div class="review-content d-flex">
@@ -176,7 +176,8 @@
                                     </svg>
                                 </div>
                             </div>
-                            <span class="price text-primary fw-bold mb-2 fs-5">{{price}}</span>
+                            <span class="price text-primary fw-bold mb-2 fs-5">{{price}} VND</span>
+                        </a>
                             <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                                         data-bs-title="Tooltip on top">
@@ -184,16 +185,16 @@
                                         <use xlink:href="#cart"></use>
                                     </svg>
                                 </button>
-                                <a href="#" class="btn btn-dark">
-                    <span>
+                                <form action="/wishlist/{{_id}}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-dark">
                       <svg class="wishlist">
                         <use xlink:href="#heart"></use>
                       </svg>
-                    </span>
-                                </a>
+                                </button>
+                                </form>
                             </div>
                         </div>
-                        </a>
+
                 </div>
                 {{/each}}
             </div>
