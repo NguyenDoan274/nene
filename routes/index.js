@@ -125,7 +125,7 @@ router.get('/category-books/:id', function(req, res, next) {
     });
 });
 
-router.post('/wishlist/:productId', (req, res) => {
+router.post('/wishlist/add/:productId', (req, res) => {
     if (!req.isAuthenticated()) {
         req.flash('error_message', 'Vui lòng đăng nhập để thêm vào wishlist ❤️');
         return res.redirect('back');
