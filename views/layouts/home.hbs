@@ -158,7 +158,7 @@
 <div class="search-popup">
     <div class="search-popup-container">
 
-        <form role="search" method="get" class="search-form" action="/search">
+        <form role="search" method="get" class="search-form" action="/shop">
             <input type="search" id="search-form" class="search-field" placeholder="Type and press enter" value=""
                    name="name" />
             <button type="submit" class="search-submit"><svg class="search">
@@ -171,7 +171,7 @@
         <ul class="cat-list">
             {{#each categories}}
                 <li class="cat-list-item">
-                    <a href="/category-books/{{_id}}" title="{{name}}">{{name}}</a>
+                    <a href="/shop?category={{_id}}" title="{{name}}">{{name}}</a>
                 </li>
             {{/each}}
 

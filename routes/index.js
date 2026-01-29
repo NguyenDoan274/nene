@@ -40,14 +40,33 @@ router.get('/', async (req, res, next) => {
 });
 
 
-router.get('/shop', function(req, res, next) {
-    Category.find({}).then((dbCategory) => {
-        categories = dbCategory.map(cat=>cat.toObject());
-    Product.find({}).then((dbProduct) => {
-        products = dbProduct.map(pro=>pro.toObject());
-        res.render('home/shop', {products: products,categories:categories});
-         });
-    });
+router.get('/shop', async (req, res) => {
+    try {
+        const categoryId = req.query.category; // Lấy ID danh mục từ URL (?category=...)
+        const author=req.query.author;
+        const name=req.query.name;
+        let filter= {};
+        if (categoryId) {
+            filter.category = categoryId;
+        }
+        if (author) {
+            filter.author = author;
+        }
+        if (name) {
+            filer.name = { $regex: keyword, $options: 'i' };
+        }
+        const [dbCategory, dbProduct] = await Promise.all([
+            Category.find({}),
+            Product.find(filter).populate('category')
+        ]);
+
+        res.render('home/shop', {
+            categories: dbCategory.map(c => c.toObject()),
+            products: dbProduct.map(p => p.toObject())
+        });
+    } catch (err) {
+        res.status(500).send(err);
+    }
 });
 
 router.get('/about', function(req, res, next) {
@@ -225,26 +244,7 @@ router.get('/logout', (req, res) => {
 
 });
 
-router.get('/search', async (req, res) => {
-    const keyword = req.query.name;
 
-    if (!keyword) {
-        return res.render('home/search', {
-            title: 'search',
-            products: []
-        });
-    }
-
-    const products = await Product.find({
-        name: { $regex: keyword, $options: 'i' }
-    });
-    const categories = await Category.find({});
-    res.render('home/search', {
-                title:'search',
-                products,
-                categories: categories.map(c => c.toObject())
-    });
-});
 
 
 module.exports = router;
