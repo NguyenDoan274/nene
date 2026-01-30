@@ -125,18 +125,36 @@ router.get('/category-books/:id', function(req, res, next) {
     });
 });
 
-router.post('/wishlist/add/:productId', (req, res) => {
+router.post('/wishlist/add/:productId', async (req, res) => {
     if (!req.isAuthenticated()) {
-        req.flash('error_message', 'Vui lòng đăng nhập để thêm vào wishlist ❤️');
+        req.flash('error_message', 'Vui lòng đăng nhập để thêm vào wishlist');
         return res.redirect('back');
     }
 
     let customerId = req.user._id;
     let productId = req.params.productId;
+    const customer = await Customer.findById(customerId);
+
+    if (customer.wishlist.includes(productId)) {
+        req.flash('error_message', 'Sản phẩm đã có trong wishlist');
+        return res.redirect('back');
+    }
+
     Customer.findByIdAndUpdate(customerId, {
         $addToSet: { wishlist: productId }
     }).then(() => {
-        req.flash('success_message', 'Đã thêm vào wishlist ❤️');
+        req.flash('success_message', 'Đã thêm vào wishlist');
+        res.redirect('back');
+    });
+});
+
+router.post('/wishlist/remove/:productId', (req, res) => {
+    let customerId = req.user._id;
+    let productId =req.params.productId;
+    Customer.findByIdAndUpdate(customerId, {
+        $pull: { wishlist: productId }
+    }).then(() =>{
+        req.flash('success_message', 'Đã xóa khỏi wishlist');
         res.redirect('back');
     });
 });

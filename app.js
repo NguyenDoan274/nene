@@ -85,7 +85,7 @@ passport.deserializeUser(async (data, done) => {
             const admin = await Employee.findById(data.id);
             return done(null, admin);
         } else {
-            const customer = await Customer.findById(data.id);
+            const customer = await Customer.findById(data.id).populate('wishlist');
             return done(null, customer);
         }
     } catch (err) {
@@ -97,6 +97,14 @@ passport.deserializeUser(async (data, done) => {
 
 // You might also need custom middleware to make flash messages available in templates
 app.use((req, res, next) => {
+    if (req.user && req.user.wishlist) {
+        res.locals.wishlists = req.user.wishlist.map(item => item.toObject());
+        res.locals.wishlistTotal = req.user.wishlist.reduce((sum, item) => {
+            return sum + (item.price || 0);
+        }, 0);
+    } else {
+        res.locals.wishlists = [];
+    }
     res.locals.user = req.user ? req.user.toObject() : null;
     res.locals.success_message = req.flash('success_message');
     res.locals.error_message = req.flash('error_message');

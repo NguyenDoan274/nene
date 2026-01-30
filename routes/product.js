@@ -37,6 +37,7 @@ router.post('/create', function(req, res, next) {
         name: req.body.name,
         image: req.body.image,
         price: req.body.price,
+        quantity: req.body.quantity,
         author: req.body.author,
         description: req.body.description,
         category: req.body.categoryId,
@@ -61,6 +62,7 @@ router.put('/edit/:id', function(req, res, next) {
         product.name = req.body.name;
         product.image = req.body.image;
         product.price = req.body.price;
+        product.quantity = req.body.quantity;
         product.author = req.body.author;
         product.description = req.body.description;
         product.category = req.body.categoryId;

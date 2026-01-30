@@ -73,8 +73,8 @@
                     <hr>
                     <div class="cart-wrap">
                         <div class="product-quantity my-3">
-                            <div class="item-title">
-                                <l>uknown in stock</l>
+                            <div class="item-title text-primary">
+                                <l>{{product.quantity}} in stock</l>
                             </div>
                             <div class="stock-button-wrap mt-2 d-flex flex-wrap align-items-center">
                                 <div class="product-quantity">
@@ -97,11 +97,13 @@
                         <div class="action-buttons my-3 d-flex flex-wrap gap-3">
                             <a href="#" class="btn">Order now</a>
                             <a href="#" class="btn btn-dark">Add to cart</a>
-                            <a href="#" class="btn btn-dark">
-                                <svg class="heart" width="21" height="21">
-                                    <use xlink:href="#heart"></use>
-                                </svg>
-                            </a>
+                            <form action="/wishlist/add/{{product._id}}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-dark">
+                                    <svg class="wishlist" width="21" height="21">
+                                        <use xlink:href="#heart"></use>
+                                    </svg>
+                                </button>
+                            </form>
                         </div>
                     </div>
                     <hr>
@@ -296,8 +298,9 @@
                 {{#each products}}
                     <div class="swiper-slide">
                         <div class="card position-relative p-4 border rounded-3">
+                            <a href="/single-product/{{_id}}">
                             <img src="{{image}}" class="img-fluid shadow-sm" alt="product item">
-                            <h6 class="mt-4 mb-0 fw-bold"><a href="/single-product/{{_id}}">{{name}}</a></h6>
+                            <h6 class="mt-4 mb-0 fw-bold">{{name}}</h6>
                             <div class="review-content d-flex">
                                 <p class="my-2 me-2 fs-6 text-black-50">{{author}}</p>
 
@@ -320,6 +323,7 @@
                                 </div>
                             </div>
                             <span class="price text-primary fw-bold mb-2 fs-5">{{price}}</span>
+
                             <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
                                 <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
                                         data-bs-title="Tooltip on top">
@@ -327,15 +331,17 @@
                                         <use xlink:href="#cart"></use>
                                     </svg>
                                 </button>
-                                <a href="#" class="btn btn-dark">
-                    <span>
-                      <svg class="wishlist">
-                        <use xlink:href="#heart"></use>
-                      </svg>
-                    </span>
-                                </a>
+                                <form action="/wishlist/add/{{_id}}" method="POST" class="d-inline">
+                                    <button type="submit" class="btn btn-dark">
+                                        <svg class="wishlist">
+                                            <use xlink:href="#heart"></use>
+                                        </svg>
+                                    </button>
+                                </form>
                             </div>
+                            </a>
                         </div>
+
                     </div>
                 {{/each}}
 

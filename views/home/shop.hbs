@@ -79,13 +79,14 @@
                                                    <use xlink:href="#cart"></use>
                                                </svg>
                                            </button>
-                                           <a href="#" class="btn btn-dark">
-                      <span>
-                        <svg class="wishlist">
-                          <use xlink:href="#heart"></use>
-                        </svg>
-                      </span>
-                                           </a>
+                                               <form action="/wishlist/add/{{_id}}" method="POST" class="d-inline">
+                                                   <button type="submit" class="btn btn-dark">
+                                                       <svg class="wishlist">
+                                                           <use xlink:href="#heart"></use>
+                                                       </svg>
+                                                   </button>
+                                               </form>
+
                                        </div>
                                    </div>
                                   </a>

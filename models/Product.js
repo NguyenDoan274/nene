@@ -22,6 +22,10 @@ const ProductSchema = new Schema({
         type: String,
         required: true,
     },
+    quantity : {
+        type: Number,
+        required: false,
+    },
     category: {
         type: Schema.Types.ObjectId,
         ref: 'Category',
