@@ -28,31 +28,31 @@
                         <h4 class="col-lg-4 py-3 m-0">Subtotal</h4>
                     </div>
                 </div>
-
-                <div class="cart-item border-bottom padding-small">
-                    <div class="row align-items-center">
-                        <div class="col-lg-4 col-md-3">
-                            <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
-                                <div class="col-lg-5">
-                                    <div class="card-image">
-                                        <img src="images/cart-item1.png" alt="cart-img" class="img-fluid border rounded-3">
+                {{#each cartProducts}}
+                    <div class="cart-item border-bottom padding-small">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 col-md-3">
+                                <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
+                                    <div class="col-lg-5">
+                                        <div class="card-image">
+                                            <img src="{{this.product.image}}" alt="{{this.product.name}}" class="img-fluid border rounded-3">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card-detail">
-                                        <h5 class="mt-2"><a href="/single-product">The Emerald Crown</a></h5>
-                                        <div class="card-price">
-                                            <span class="price text-primary fw-light" data-currency-usd="$2000.00">$2000.00</span>
+                                    <div class="col-lg-4">
+                                        <div class="card-detail">
+                                            <h5 class="mt-2"><a href="/single-product">{{this.product.name}}</a></h5>
+                                            <div class="card-price">
+                                                <span class="price text-primary fw-light" >{{this.product.price}} VND</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7">
-                            <div class="row d-flex">
-                                <div class="col-md-6">
-                                    <div class="product-quantity my-2 my-2">
-                                        <div class="input-group product-qty align-items-center" style="max-width: 150px;">
+                            <div class="col-lg-6 col-md-7">
+                                <div class="row d-flex">
+                                    <div class="col-md-6">
+                                        <div class="product-quantity my-2 my-2">
+                                            <div class="input-group product-qty align-items-center" style="max-width: 150px;">
                           <span class="input-group-btn">
                             <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-left-minus"
                                     data-type="minus" data-field="">
@@ -61,10 +61,10 @@
                               </svg>
                             </button>
                           </span>
-                                            <input type="text" id="quantity" name="quantity"
-                                                   class="form-control bg-white shadow border rounded-3 py-2 mx-2 input-number text-center"
-                                                   value="1" min="1" max="100" required>
-                                            <span class="input-group-btn">
+                                                <input type="text" id="quantity" name="quantity"
+                                                       class="form-control bg-white shadow border rounded-3 py-2 mx-2 input-number text-center"
+                                                       value="{{this.quantity}}" readonly>
+                                                <span class="input-group-btn">
                             <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-right-plus"
                                     data-type="plus" data-field="">
                               <svg width="16" height="16">
@@ -72,91 +72,28 @@
                               </svg>
                             </button>
                           </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="total-price">
+                                            <span class="money fs-2 fw-light text-primary">{{ multiply this.quantity this.product.price}} VND</span>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="total-price">
-                                        <span class="money fs-2 fw-light text-primary">$2000.00</span>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-1 col-md-2">
-                            <div class="cart-cross-outline">
-                                <a href="#">
-                                    <svg class="cart-cross-outline" width="38" height="38">
-                                        <use xlink:href="#cart-cross-outline"></use>
-                                    </svg>
-                                </a>
+                            <div class="col-lg-1 col-md-2">
+                                <div class="cart-cross-outline">
+                                    <a href="#">
+                                        <svg class="cart-cross-outline" width="38" height="38">
+                                            <use xlink:href="#cart-cross-outline"></use>
+                                        </svg>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="cart-item border-bottom padding-small">
-                    <div class="row align-items-center">
-                        <div class="col-lg-4 col-md-3">
-                            <div class="cart-info d-flex gap-2 flex-wrap align-items-center">
-                                <div class="col-lg-5">
-                                    <div class="card-image">
-                                        <img src="images/cart-item2.png" alt="cart-img" class="img-fluid border rounded-3">
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="card-detail">
-                                        <h5 class="mt-2"><a href="/single-product">The Last Enchantment</a></h5>
-                                        <div class="card-price">
-                                            <span class="price text-primary fw-light" data-currency-usd="$2000.00">$400.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-7">
-                            <div class="row d-flex">
-                                <div class="col-lg-6">
-                                    <div class="product-quantity my-2">
-                                        <div class="input-group product-qty align-items-center" style="max-width: 150px;">
-                          <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-left-minus"
-                                    data-type="minus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#minus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                                            <input type="text" id="quantity" name="quantity"
-                                                   class="form-control bg-white shadow border rounded-3 py-2 mx-2 input-number text-center"
-                                                   value="1" min="1" max="100" required>
-                                            <span class="input-group-btn">
-                            <button type="button" class="bg-white shadow border rounded-3 fw-light quantity-right-plus"
-                                    data-type="plus" data-field="">
-                              <svg width="16" height="16">
-                                <use xlink:href="#plus"></use>
-                              </svg>
-                            </button>
-                          </span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="total-price">
-                                        <span class="money fs-2 fw-light text-primary">$400.00</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-1 col-md-2">
-                            <div class="cart-cross-outline">
-                                <a href="#">
-                                    <svg class="cart-cross-outline" width="38" height="38">
-                                        <use xlink:href="#cart-cross-outline"></use>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{/each}}
             </div>
             <div class="cart-totals padding-medium pb-0">
                 <h3 class="mb-3">Cart Totals</h3>
@@ -168,7 +105,7 @@
                             <td data-title="Subtotal">
                       <span class="price-amount amount text-primary ps-5 fw-light">
                         <bdi>
-                          <span class="price-currency-symbol">$</span>2,400.00
+                          <span class="price-currency-symbol">VND</span> {{totalPrice}}
                         </bdi>
                       </span>
                             </td>
@@ -178,7 +115,7 @@
                             <td data-title="Total">
                       <span class="price-amount amount text-primary ps-5 fw-light">
                         <bdi>
-                          <span class="price-currency-symbol">$</span>2,400.00</bdi>
+                          <span class="price-currency-symbol">VND</span>{{totalPrice}}</bdi>
                       </span>
                             </td>
                         </tr>

@@ -19,6 +19,9 @@ app.engine(
     'hbs',
     engine({
         extname: 'hbs',
+        helpers : {
+            multiply :(a,b) => a * b
+        },
         defaultLayouts: 'layouts',
         partialsDir: path.join(__dirname, 'views', 'partials'),
         layoutsDir: path.join(__dirname, 'views', 'layouts'),
@@ -105,6 +108,7 @@ app.use((req, res, next) => {
     } else {
         res.locals.wishlists = [];
     }
+    res.locals.cart = req.session.cart || { items: {}, totalQty: 0, totalPrice: 0 };
     res.locals.user = req.user ? req.user.toObject() : null;
     res.locals.success_message = req.flash('success_message');
     res.locals.error_message = req.flash('error_message');

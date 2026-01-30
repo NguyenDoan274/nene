@@ -78,8 +78,51 @@ router.get('/blog', function(req, res, next) {
     res.render('home/blog');
 });
 
+router.post('/cart/add/:productId',async (req, res) => {
+    let productId = req.params.productId;
+    let quantity = parseInt(req.body.quantity) || 1;
+    let cart = req.session.cart || {
+        items: {},
+        totalQty: 0,
+        totalPrice: 0
+    };
+
+    try {
+        const product = await Product.findById(productId);
+        if (!product) {
+            return res.redirect('back');
+        }
+
+            if (!cart.items[productId]) {
+                cart.items[productId] = {
+                    product : product.toObject(),
+                    quantity: 0
+                };
+            }
+            cart.items[productId].quantity += quantity;
+            cart.totalQty +=  quantity;
+            cart.totalPrice += product.price * quantity;
+
+            req.session.cart = cart;
+        req.flash('success_message', 'Đã thêm vào giỏ hàng');
+            res.redirect('back');
+    }
+    catch (error) {
+        res.status(500).send("error");
+    }
+})
+
 router.get('/cart', function(req, res, next) {
-    res.render('home/cart');
+    let cart = req.session.cart;
+    let cartProducts = [];
+    if (cart) {
+        cartProducts = Object.values(cart.items);
+    }
+    res.render('home/cart', {
+        title: 'cart',
+        cartProducts,
+        totalPrice: cart ? cart.totalPrice : 0,
+    });
 });
 
 router.get('/checkout', function(req, res, next) {
@@ -158,6 +201,8 @@ router.post('/wishlist/remove/:productId', (req, res) => {
         res.redirect('back');
     });
 });
+
+
 
 router.get('/login', function(req, res, next) {
     res.render('home/login', { title: 'login'});

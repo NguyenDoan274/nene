@@ -96,7 +96,12 @@
                         </div>
                         <div class="action-buttons my-3 d-flex flex-wrap gap-3">
                             <a href="#" class="btn">Order now</a>
-                            <a href="#" class="btn btn-dark">Add to cart</a>
+
+                                <form action="/cart/add/{{product._id}}" method="POST" class="d-inline">
+                                    <input type="hidden" name="quantity" id="cart-quantity">
+                                    <button type="submit" class="btn btn-dark">Add to cart</button>
+                                </form>
+
                             <form action="/wishlist/add/{{product._id}}" method="POST" class="d-inline">
                                 <button type="submit" class="btn btn-dark">
                                     <svg class="wishlist" width="21" height="21">
@@ -325,12 +330,14 @@
                             <span class="price text-primary fw-bold mb-2 fs-5">{{price}}</span>
 
                             <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Tooltip on top">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </button>
+                                <form action="/cart/add/{{_id}}" method="POST">
+                                    <button type="submit" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-title="Tooltip on top">
+                                        <svg class="cart">
+                                            <use xlink:href="#cart"></use>
+                                        </svg>
+                                    </button>
+                                </form>
                                 <form action="/wishlist/add/{{_id}}" method="POST" class="d-inline">
                                     <button type="submit" class="btn btn-dark">
                                         <svg class="wishlist">
@@ -615,3 +622,11 @@
         </div>
     </div>
 </section>
+<script>
+    const qtyInput = document.getElementById('quantity');
+    const cartQty = document.getElementById('cart-quantity');
+    cartQty.value = qtyInput.value;
+    qtyInput.addEventListener('input', () => {
+        cartQty.value = qtyInput.value;
+    });
+</script>

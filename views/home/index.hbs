@@ -179,12 +179,14 @@
                             <span class="price text-primary fw-bold mb-2 fs-5">{{price}} VND</span>
                         </a>
                             <div class="card-concern position-absolute start-0 end-0 d-flex gap-2">
-                                <button type="button" href="#" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
-                                        data-bs-title="Tooltip on top">
-                                    <svg class="cart">
-                                        <use xlink:href="#cart"></use>
-                                    </svg>
-                                </button>
+                                <form action="/cart/add/{{_id}}" method="POST">
+                                    <button type="submit" class="btn btn-dark" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-title="Tooltip on top">
+                                        <svg class="cart">
+                                            <use xlink:href="#cart"></use>
+                                        </svg>
+                                    </button>
+                                </form>
                                 <form action="/wishlist/add/{{_id}}" method="POST" class="d-inline">
                                     <button type="submit" class="btn btn-dark">
                       <svg class="wishlist">
