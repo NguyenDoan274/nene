@@ -104,7 +104,7 @@ router.post('/cart/add/:productId',async (req, res) => {
             cart.totalPrice += product.price * quantity;
 
             req.session.cart = cart;
-        req.flash('success_message', 'Đã thêm vào giỏ hàng');
+        req.flash('success_message', `Đã thêm ${quantity} vào giỏ hàng`);
             res.redirect('back');
     }
     catch (error) {
